@@ -1,0 +1,45 @@
+fundamental-mode
+
+(zoom "https://umass-amherst.zoom.us/my/hydro.umass")
+
+mu4e-compose-mode org-msg-edit-mode notmuch-message-mode
+
+(grad "Thanks for your message. Unfortunately I do not currently have any funding for graduate students. If anything changes I will be posting available positions at https://hydro-umass.github.io/join" n "Best regards," n )
+
+(thanks "Thanks for submitting tour application. I will be reviewing all the applications shortly and will be contacting the selected candidates for an interview (ideally) by the end of this month." n "Best regards," n)
+
+latex-mode
+
+(cols "\\begin{columns}\n\\begin{column}{0.5\\linewidth}" n> p n "\\end{column}\n\\begin{column}{0.5\\linewidth}" n> p n "\\end{column}\n\\end{columns}")
+(ig "\\includegraphics[width=\\textwidth]{" p "}")
+
+org-mode
+
+(title "#+title: " p n "#+author: Kostas Andreadis" n n)
+(lisp "#+begin_src emacs-lisp " p n> r> n> "#+end_src" :post (org-edit-src-code))
+(ipy "#+begin_src ipython " p n> r> n> "#+end_src" :post (org-edit-src-code))
+(example "#+begin_example" n> r> n> "#+end_example")
+(center "#+begin_center" n> r> n> "#+end_center")
+(comment "#+begin_comment" n> r> n> "#+end_comment")
+(verse "#+begin_verse" n> r> n> "#+end_verse")
+(src "#+begin_src " p n> r> n> "#+end_src" :post (org-edit-src-code))
+(eq "$$ " p " $$")
+(lwid "#+attr_latex: :width 0." p "\linewidth")
+(js "* " p n ":PROPERTIES:" n ":metadata (slideshow . ((slide_type . slide)))" n ":END:")
+(jsb "#+attr_ipynb: (slideshow . ((slide_pyte . subslide)))")
+(jss "#+attr_ipynb: (slideshow . ((slide_type . slide)))")
+(rcol "#+reveal_html: <div class=\"twocolumn\"><div>" n> n> "#+reveal_html: </div><div>" n> n> "#+reveal_html: </div>")
+(rthe "#+reveal_html: <div class=\"theorem\">" n> q n> "#+reveal_html: </div>")
+(rblo "#+reveal_html: <div class=\"block\">" n> q n> "#+reveal_html: </div>")
+(rfblo "#+reveal_html: <div class=\"fragment block\">" n> q n> "#+reveal_html: </div>")
+(rfra "#+reveal_html: <span class=\"fragment\">" n> q n> "#+reveal_html: </span>")
+(rapp "#+attr_reveal: :frag (appear)" n> "- " q)
+(rsp "#+reveal: split" n> q)
+(rimg "#+attr_html: :width "p n>)
+(phi "\\Phi \\left( \\dfrac{" p "}{" p "}\\right)")
+(img "#+attr_html: :width " q)
+(limg "#+attr_latex: :width " q"\\linewidth")
+(vol "V\\kern-0.8em\\raise0.3ex-")
+
+emacs-lisp-mode
+(aload ";;;###autoload")
