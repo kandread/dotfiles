@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 
   home.packages = with pkgs; [
     # Writing
-    #libreoffice-fresh
     pandoc
     texlive.combined.scheme-full
     texlab
@@ -17,13 +16,7 @@
     # Web
     w3m
 
-    # Communication
-    #slack
-    #gp-saml-gui
-    #zoom-us
-
     # Graphics
-    #inkscape
     graphviz
 
     # Viewers
@@ -36,9 +29,6 @@
 
     # Multimedia
     imagemagick
-    #pulsemixer
-    #pamixer
-    mpv
     ffmpeg
 
     # Security
@@ -46,7 +36,6 @@
 
     # Utilities
     ghostscript
-    #bluetuith
     gnupg
     ripgrep
     fd
@@ -60,8 +49,6 @@
     pdftk
     bat
     rsync
-    #betterlockscreen
-    #brightnessctl
 
     # Productivity
     khal
@@ -71,7 +58,18 @@
     # Development
     plantuml
     tree-sitter
-
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    zotero
+    brightnessctl
+    betterlockscreen
+    bluetuith
+    pamixer
+    pulsemixer
+    inkscape
+    slack
+    gp-saml-gui
+    zoom-us
+    libreoffice-fresh
   ];
 
 }
