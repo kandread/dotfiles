@@ -53,12 +53,12 @@
     };
   };
 
-  #services = {
-  #  mbsync = {
-  #    enable = true;
-  #    frequency = "*:0/5";
-  #  };
-  #};
+  services = {
+    mbsync = {
+      enable = pkgs.stdenv.isLinux;
+      frequency = "*:0/5";
+    };
+  };
 
   accounts.email = {
     maildirBasePath = "Mail";
