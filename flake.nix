@@ -42,7 +42,7 @@
       nixosConfigurations = (
         import ./system/nixos {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixos-hardware nix-ld home-manager emacs username;
+          inherit inputs nixpkgs lix nixos-hardware nix-ld home-manager emacs username;
         }
       );
 
