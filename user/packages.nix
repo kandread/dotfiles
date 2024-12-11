@@ -31,9 +31,6 @@
     imagemagick
     ffmpeg
 
-    # Security
-    keepassxc
-
     # Utilities
     ghostscript
     gnupg
