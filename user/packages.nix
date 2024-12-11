@@ -59,6 +59,7 @@
     zotero
     brightnessctl
     betterlockscreen
+    feh
     bluetuith
     pamixer
     pulsemixer
