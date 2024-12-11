@@ -7,6 +7,7 @@ let
     inherit system;
     config = {
       allowUnfree = true;
+      joypixels.acceptLicense = true;
     };
     overlays = [
       emacs.overlay
@@ -17,12 +18,13 @@ let
 
 in {
   ECS-196025 = darwin.lib.darwinSystem {
-    inherit system;
+    inherit system pkgs;
     specialArgs = { inherit inputs; };
     modules = [
       lix.nixosModules.default
       ./darwin.nix
       ./homebrew.nix
+      ./launchd.nix
       ../fonts.nix
       home-manager.darwinModules.home-manager
           {
