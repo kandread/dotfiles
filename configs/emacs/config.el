@@ -150,10 +150,7 @@
   (dired-recursive-deletes 'top)
   (dired-auto-revert-buffer t)
   (dired-kill-when-opening-new-dired-buffer nil)
-  (dired-hide-details-hide-symlink-targets nil)
-  :config
-  (when (memq window-system '(mac ns x))
-    (setopt insert-directory-program "/etc/profiles/per-user/kandread/bin/ls")))
+  (dired-hide-details-hide-symlink-targets nil))
 
 (use-package dired-launch
   :hook (dired-load . dired-launch-mode)
@@ -826,21 +823,25 @@
   :custom (fill-flowed-encode-column 998))
 
 (use-package org-msg
-  :hook (notmuch-hello-mode . org-msg-mode)
+  :bind (:map org-msg-edit-mode-map
+              ("C-c f c" . message-goto-cc)
+              ("C-c f b" . message-goto-bcc)
+              ("C-c f t" . message-goto-to)
+              ("C-c f f" . message-goto-from)
+              ("C-c f s" . message-goto-subject))
   :config
   (defun org-msg/kill-ascii-export-buffer-a ()
     "Kill redundant Org ASCII export buffer after sending message."
     (with-current-buffer "*Org ASCII Export*" (kill-buffer-and-window)))
   (advice-add 'org-msg-ctrl-c-ctrl-c :after #'org-msg/kill-ascii-export-buffer-a)
-  (defun email/org-msg-notmuch-tag-replied ()
-    "Tag messages as replied when using org-msg."
-    (when (eq major-mode 'org-msg-edit-mode)
-      (if-let* ((in-reply-to (org-msg-message-fetch-field "in-reply-to"))
-                (id (and (string-match "<\\(.+\\)>" in-reply-to) (match-string 1 in-reply-to))))
-          (notmuch-tag (notmuch-id-to-query id) notmuch-message-replied-tags))))
-  (add-hook 'org-ctrl-c-ctrl-c-hook #'email/org-msg-notmuch-tag-replied)
+  ;; (defun email/org-msg-notmuch-tag-replied ()
+  ;;   "Tag messages as replied when using org-msg."
+  ;;   (when (eq major-mode 'org-msg-edit-mode)
+  ;;     (if-let* ((in-reply-to (org-msg-message-fetch-field "in-reply-to"))
+  ;;               (id (and (string-match "<\\(.+\\)>" in-reply-to) (match-string 1 in-reply-to))))
+  ;;         (notmuch-tag (notmuch-id-to-query id) notmuch-message-replied-tags))))
+  ;; (add-hook 'org-ctrl-c-ctrl-c-hook #'email/org-msg-notmuch-tag-replied)
   :custom
-  (mail-user-agent 'notmuch-user-agent)
   (org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t")
   (org-msg-startup "hidestars indent inlineimages")
   (org-msg-greeting-fmt "\nHi%s,\n\n")
@@ -1168,7 +1169,7 @@ https://hydro-umass.github.io
 (use-package minions
   :hook (elpaca-after-init . minions-mode)
   :custom
-  (minions-prominent-modes '(auto-revert-mode)))
+  (minions-prominent-modes '(auto-revert-mode envrc-mode flymake-mode)))
 
 ;; query org files
 (use-package org-ql
