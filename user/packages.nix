@@ -50,13 +50,12 @@
     # Productivity
     khal
     vdirsyncer
-    #zotero
+    zotero
 
     # Development
     plantuml
     tree-sitter
   ] ++ lib.optionals pkgs.stdenv.isLinux [
-    zotero
     brightnessctl
     betterlockscreen
     feh
