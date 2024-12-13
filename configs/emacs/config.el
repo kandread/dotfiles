@@ -461,6 +461,18 @@
 
 (use-package haskell-mode)
 
+(use-package python
+  :ensure nil
+  :custom
+  (python-shell-interpreter "ipython")
+  (python-shell-interpreter-args "")
+  (python-shell-completion-native-enable nil)
+  (python-shell-prompt-regexp "In \[[0-9]+\]: ")
+  (python-shell-prompt-output-regexp "Out\[[0-9]+\]: ")
+  (python-shell-completion-setup-code "")
+  (python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n")
+  )
+
 ;; plantUML
 (use-package plantuml-mode
   :custom
@@ -485,7 +497,7 @@
   :ensure org-contrib
   :demand
   :hook
-  (org-mode . org/prettify-checkbox)
+  ;; (org-mode . org/prettify-checkbox)
   (org-checkbox-statistics . org/checkbox-list-complete)
   (org-after-todo-statistics . org/org-summary-todo)
   (org-after-todo-state-change . org/remove-schedule-when-waiting)
@@ -691,8 +703,8 @@
                            ("SOMEDAY" :background "#8470ff" :foreground "white")
                            ("CANCELED" :background "#dda0dd" :foreground "black")))
   (org-modern-star 'replace)
-  (org-modern-checkbox nil)
-  ;; (org-modern-checkbox '((88 . "󰄲") (45 . "󰡖") (32 . "󰄱")))
+  ;; (org-modern-checkbox nil)
+  (org-modern-checkbox '((88 . "") (45 . "") (32 . "")))
   :config
   (add-to-list 'org-modern-tag-faces '("someday" . (:background "#8470ff" :foreground "white"))))
 
@@ -858,6 +870,7 @@
                              ("tminear@colorado.edu" . "Toby")
                              ("o.wing@fathom.global". "Ollie")
                              ("durand.8@osu.edu" . "Mike")
+                             ("mzink@cas.umass.edu" . "Mike")
                              ("ksouth@umass.edu" . "Katie")
                              ("frederick.s.policelli@nasa.gov" . "Fritz")
                              ("arhollan@umass.edu" . "Addie Rose")))
@@ -1063,7 +1076,7 @@ https://hydro-umass.github.io
 
 ;; load local environments
 (use-package envrc
-  :hook (elpaca-after-init . envrc-global-mode)
+  :hook (prog-mode . envrc-mode)
   :custom (envrc-none-lighter ""))
 
 ;; julia
