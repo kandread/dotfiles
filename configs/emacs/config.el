@@ -854,6 +854,7 @@
   ;;         (notmuch-tag (notmuch-id-to-query id) notmuch-message-replied-tags))))
   ;; (add-hook 'org-ctrl-c-ctrl-c-hook #'email/org-msg-notmuch-tag-replied)
   :custom
+  (message-signature nil)
   (org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t")
   (org-msg-startup "hidestars indent inlineimages")
   (org-msg-greeting-fmt "\nHi%s,\n\n")
