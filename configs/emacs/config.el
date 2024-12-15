@@ -897,7 +897,7 @@ https://hydro-umass.github.io
   (denote-known-keywords '("project" "literature" "fleeting" "slipbox"))
   (denote-infer-keywords nil)
   (denote-sort-keywords t)
-  (denote-prompts '(keyword title))
+  (denote-prompts '(keywords title))
   (denote-date-prompt-use-org-read-date t)
   (denote-allow-multi-word-keywords nil)
   (denote-rename-no-confirm t)
