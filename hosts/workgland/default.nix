@@ -4,7 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware.nix
-      ../../nixos/common.nix
+      ../../system/nixos/common.nix
     ];
 
   # Bootloader.
@@ -17,7 +17,10 @@
   services.openssh.enable = true;
 
   # Enable bluetooth
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   # Enable OpenGL
   hardware.graphics = {
