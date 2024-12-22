@@ -19,6 +19,7 @@
       size = 50000;
     };
     autocd = true;
+    enableCompletion = true;
     historySubstringSearch = {
       enable = true;
       searchUpKey = "^[[A"; #"$terminfo[kcuu1]";
