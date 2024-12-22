@@ -30,6 +30,7 @@
     # Multimedia
     imagemagick
     ffmpeg
+    mpv
 
     # Utilities
     ghostscript
