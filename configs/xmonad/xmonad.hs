@@ -203,6 +203,9 @@ myStartupHook = do
   spawnOnce "xsetroot -cursor_name left_ptr"
   spawnOnce "feh --bg-fill --no-fehbg ~/.wallpapers/kace.jpg"
   spawnOnce "trayer --edge top --align right --widthtype request --padding 2 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x1a1b26 --height 40"
+  spawnOnce "setxkbmap -option grp:shifts_toggle us,gr"
+  spawnOnce "xset s off"
+  spawnOnce "xset -dpms"
   setWMName "LG3D"
 
 -- Functions to be hooked into as window rules
@@ -246,7 +249,7 @@ myManageHook = composeAll
 -- Clear workspace name when window is killed and there are no windows left
 myHandleEventHook :: Event -> X All
 myHandleEventHook = composeAll
-  [ swallowEventHook (className =? "kitty" <||> title ~? "Zoom Workplace") (return True)
+  [ swallowEventHook (className =? "Alacritty" <||> title ~? "Zoom Workplace") (return True)
   , clearWorkspaceNameHook
   , trayerPaddingXmobarEventHook
   ]
