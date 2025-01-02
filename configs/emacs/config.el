@@ -835,24 +835,23 @@
   :custom (fill-flowed-encode-column 998))
 
 (use-package org-msg
+  :hook (mu4e-main-mode . org-msg-mode)
   :bind (:map org-msg-edit-mode-map
               ("C-c f c" . message-goto-cc)
               ("C-c f b" . message-goto-bcc)
               ("C-c f t" . message-goto-to)
               ("C-c f f" . message-goto-from)
               ("C-c f s" . message-goto-subject))
+  :preface
+  (defun org-msg-no-temp-buffer (orig-fun &rest args)
+    "Advice to set `org-export-show-temporary-export-buffer' to `nil'."
+    (let ((org-export-show-temporary-export-buffer nil))
+      (apply orig-fun args)))
   :config
-  (defun org-msg/kill-ascii-export-buffer-a ()
-    "Kill redundant Org ASCII export buffer after sending message."
-    (with-current-buffer "*Org ASCII Export*" (kill-buffer-and-window)))
-  (advice-add 'org-msg-ctrl-c-ctrl-c :after #'org-msg/kill-ascii-export-buffer-a)
-  ;; (defun email/org-msg-notmuch-tag-replied ()
-  ;;   "Tag messages as replied when using org-msg."
-  ;;   (when (eq major-mode 'org-msg-edit-mode)
-  ;;     (if-let* ((in-reply-to (org-msg-message-fetch-field "in-reply-to"))
-  ;;               (id (and (string-match "<\\(.+\\)>" in-reply-to) (match-string 1 in-reply-to))))
-  ;;         (notmuch-tag (notmuch-id-to-query id) notmuch-message-replied-tags))))
-  ;; (add-hook 'org-ctrl-c-ctrl-c-hook #'email/org-msg-notmuch-tag-replied)
+  (advice-add 'org-msg-preview :around #'org-msg-no-temp-buffer)
+  (advice-add 'org-msg-ctrl-c-ctrl-c :around #'org-msg-no-temp-buffer)
+  (remove-hook 'message-sent-hook #'undo t)
+  (add-hook 'message-sent-hook (lambda () (mu4e--server-remove (buffer-file-name))))
   :custom
   (message-signature nil)
   (org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t")
